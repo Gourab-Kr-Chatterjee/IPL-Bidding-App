@@ -1,0 +1,53 @@
+
+<div class="team-list-container" >
+    <h2>Team List</h2>
+    <ul *ngFor="let team of teams" >
+
+        <li>{{team.name}} (Budget: {{team.maximumBudget}})
+            <span><button (click)="onEditTeam(team)" >Edit</button></span>
+            <span><button (click)="onDeleteTeam(team.id)" >Delete</button></span>
+        </li>
+
+        <div *ngIf="selectedTeam == team" >
+            <form #editForm="ngForm" (ngSubmit)="onSaveEditedTeam(editForm.value)" >
+                <div>
+                    <label for="name">Team Name:</label>
+                    <input type="text" id="name" name="name" ngModel >
+                </div>
+
+                <div>
+                    <label for="maximumBudget">Maximum Budget</label>
+                    <input type="number" name="maximumBudget" id="maximumBudget" ngModel >    
+                </div>
+
+                <div>
+                    <button type="submit">Update</button>
+                    <button (click)="onCancelEdit()" >Cancel Edit</button>
+                </div>
+
+            </form>
+        </div>
+
+    </ul>
+</div>
+
+<div class="create-team-container" >
+    <form #createForm="ngForm" (ngSubmit)="createTeam()" >
+        <div>
+            <label for="name">Team Name:</label>
+            <input type="text" id="name" name="name" [(ngModel)]="newTeam.name" >
+        </div>
+
+        <div>
+            <label for="maximumBudget">Maximum Budget</label>
+            <input type="number" name="maximumBudget" id="maximumBudget" [(ngModel)]="newTeam.maximumBudget" >
+        </div>
+
+        <div>
+            <button type="submit">Create</button>
+        </div>
+
+    </form>
+</div>
+
+<div id="maximumBudgetStatus" >MaximumBudget Status: {{maximumBidStatus}}</div>

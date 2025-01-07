@@ -1,0 +1,18 @@
+<nav>
+    <div class="title" ><h1>IPL Bidding App</h1></div>
+
+    <!-- home-page -->
+    <div id="home-link"><a routerLink="/">Home</a></div>
+
+    <!-- next-action -->
+    <div id="next-action"> <a [routerLink]="nextAction.link" >{{nextAction.linkName}}</a> </div>
+
+    <!-- auth-action -->
+    <div *ngIf="isLoggedIn" >
+        <a (click)="logout()" >Logout</a>
+    </div>
+    <div *ngIf="!isLoggedIn" >
+        <a routerLink="/login" >Login</a> 
+    </div>
+
+</nav>

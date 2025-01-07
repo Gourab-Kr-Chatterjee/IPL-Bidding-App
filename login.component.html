@@ -1,0 +1,31 @@
+
+<div><h1>Login Form</h1></div>
+
+<form #form="ngForm"  (ngSubmit)="login()">
+    <label for="username">UserName:</label>
+    <input type="text" name="username" id="username" #usernameEle="ngModel" [(ngModel)]="username" required>
+    <br>
+    <div class="error-message" *ngIf="usernameEle.touched && usernameEle.invalid" >
+        Username is required
+    </div>
+
+    <label for="password">Password:</label>
+    <input type="text" name="password" id="password" #passwordEle="ngModel" [(ngModel)]="password" required>
+    <div class="error-message" *ngIf="passwordEle.touched && passwordEle.invalid" >
+        Password is required
+    </div>
+    <br>
+    
+    <label for="role">Role:</label>
+    <select name="role" id="role" [(ngModel)]="role" #roleEle="ngModel" required>
+        <option *ngFor="let role of ROLES" [value]="role">{{role}}</option>
+    </select>
+    <div class="error-message" *ngIf="roleEle.touched && roleEle.invalid" >
+        Role is required
+    </div>
+
+    <button type="submit" [disabled]="form.invalid" >Login</button>
+
+</form>
+
+<div *ngIf="isUnauthorized" >Invalid credientials!</div>

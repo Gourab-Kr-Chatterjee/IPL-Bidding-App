@@ -1,0 +1,52 @@
+
+<!-- display player list -->
+<div class="player-list-container" >
+    <h2>Player list</h2>
+    <ul *ngFor="let player of players" >
+        <li>{{player.name}}(Age: {{player.age}} Category: {{player.category}} Price: {{player.biddingPrice}})
+            <span><button (click)="onEditPlayer(player)" >Edit</button></span>          <!--  button to enable editting -->
+            <span><button (click)="onDeletePlayer(player.id)" >Delete</button></span>    <!--  button to delete player -->
+        </li>
+    </ul>
+</div>
+
+<br>
+<br>
+
+<!-- input player form -->
+<div class="create-player-container" >
+    <form (ngSubmit)="selectedPlayer==null?createPlayer():onSaveEditedPlayer()" >
+
+    <div>
+        <label for="name">Player Name:</label>
+        <input type="text" id="name" name="name" [(ngModel)]="newPlayer.name" >
+    </div>
+
+    <div>
+        <label for="budget">Player Age:</label>
+        <input type="number" name="budget" id="budget" [(ngModel)]="newPlayer.age" >
+    </div>
+
+    <div>
+        <label for="category">Category: </label>
+        <select name="category" id="category" [(ngModel)]="newPlayer.category" >
+            <option *ngFor="let cat of PLAYER_CATEGORIES " [value]="cat">{{cat}}</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="biddingPrice">Bidding Price:</label>
+        <input type="number" name="biddingPrice" id="biddingPrice" [(ngModel)]="newPlayer.biddingPrice" >
+    </div>
+
+    <div id="maximumBudgetStatus" >Bidding Price Status: {{biddingPriceStatus}}</div>
+
+    <div>
+        <button type="submit" [innerText]="selectedPlayer==null?'Create':'Update'"></button>
+        <button *ngIf="selectedPlayer!=null" (click)="onCancelEdit()" >Cancel</button>
+    </div>
+
+    </form>
+</div>
+
+

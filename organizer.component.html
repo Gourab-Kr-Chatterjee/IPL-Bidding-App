@@ -1,0 +1,41 @@
+
+<H1>Organizer Panel</H1>
+<h2>Unsold Players</h2>
+<div id="unsold-player-container" >
+    <div id="filter-container">
+        <p>Filter by Category:</p>
+        <select name="category" id="category" #categorySelect (change)="filterByCategory(categorySelect.value)" >
+            <option *ngFor="let cat of CATEGORIES"  [value]="cat">{{cat}}</option>
+        </select>
+    </div>
+
+    <div id="unsold-player-list">
+        <div *ngFor="let player of showList" >
+            <p>{{player.name}}(Age : {{player.age}}) - Category: {{player.category}}</p>
+                <select name="teamToAssign" id="teamToAssign" #teamToAssign="ngModel" ngModel required >
+                    <option *ngFor="let team of teams"  [value]="team.id">{{team.name}}</option>
+                </select>
+                <button (click)="assign(player.id,teamToAssign.value)" [disabled]="teamToAssign.invalid" >Assign to Team</button>
+        </div>
+    </div>
+</div>
+
+<div id="team-container" >
+    <div><h2>Team List</h2></div>
+    <ol id="team-list" >
+        <div *ngFor="let team of teams" >
+
+            <li><b>{{team.name}} (Budget: {{team.maximumBudget}})</b> <button (click)="toggleSelectedTeam(team.id)" >Player List</button> </li>
+            <div id="player-list" *ngIf="selectedTeamId==team.id" >
+                <div id="team-player" *ngFor="let player of players" >
+
+                    <p>Player Name: {{player.name}}</p>
+                    <p>Bidding Price: {{player.biddingPrice}}</p>
+                    <button (click)="releasePlayer(player.id)" >Release Player</button>
+
+                </div>
+            </div>
+
+        </div> 
+    </ol>
+</div>

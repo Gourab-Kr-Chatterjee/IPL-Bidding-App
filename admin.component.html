@@ -1,0 +1,19 @@
+<h1>Admin Panel</h1>
+
+<app-team  [teams]="teams" 
+        [selectedTeam]="selectedTeam"
+        (editTeamEvent) = "onEditTeam($event)"
+        (saveEditedTeamEvent) = "onSaveEditedTeam($event)"
+        (cancelEditTeamEvent) = "onCancelEditTeam()"
+        (deleteTeamEvent) = "onDeleteTeam($event)"
+        (createTeamEvent) = "onCreateTeam($event)">
+</app-team>
+
+<app-player [players]="players" 
+            [selectedPlayer]="selectedPlayer"
+            (editPlayerEvent) = "onEditPlayer($event)"
+            (saveEditedPlayerEvent) = "onSaveEditedPlayer($event)"
+            (cancelEditPlayerEvent) = "onCancelEditPlayer()"
+            (deletePlayerEvent) = "onDeletePlayer($event)"
+            (createPlayerEvent) = "onCreatePlayer($event)">
+</app-player>

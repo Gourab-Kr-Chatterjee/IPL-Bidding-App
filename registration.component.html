@@ -1,0 +1,39 @@
+
+<div><h1>Registration Form</h1></div>
+
+<form #registrationFrom="ngForm" (ngSubmit)="createUser()">
+    <label for="username">UserName:</label>
+    <input type="text" name="username" id="username" #username ="ngModel" [(ngModel)]="newUser.username" (input)="checkUsername()" required>
+    <br>
+    <div class="error-message" *ngIf="usernameIsInvalid" >
+        Username is required
+    </div>
+
+    <label for="password">Password:</label>
+    <input type="text" name="password" id="password" #password="ngModel" [(ngModel)]="newUser.password"  (input)="checkPassword()" required>
+    <div class="error-message" *ngIf="passwordIsInvalid" >
+        Password is required
+    </div>
+    <br>
+    
+    <label for="confirmPassword">Confirm Password:</label>
+    <input type="text" name="confirmPassword" id="confirmPassword" #confirmPassword="ngModel"  [(ngModel)]="newUser.confirmPassword"  required>
+    <div class="error-message" *ngIf="confirmPassword.touched && confirmPassword.invalid" >
+        Confirm Password is required
+    </div>
+    <div class="error-message" *ngIf="passwordMismatch" >
+        Passwords must match!
+    </div>
+    <br>
+
+    <label for="role">Role:</label>
+    <select name="role" id="role" [(ngModel)]="newUser.role" #role="ngModel" required>
+        <option *ngFor="let role of ROLES" [value]="role">{{role}}</option>
+    </select>
+    <div class="error-message" *ngIf="role.touched && role.invalid" >
+        Role is required
+    </div>
+
+    <button type="submit" [disabled]="registrationFrom.invalid || passwordMismatch" >Register</button>
+
+</form>
